@@ -704,11 +704,10 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
               var table = $(document.createElement('table')).attr({id:"infotbl"});
               table.append("<tr><th>Round</th><th>Price</th><th>Time</th></tr>");
               table.append("<tr><td><a onclick='showtab(1)'>Waves 1-10 NM/Queen kill/Completionist requirement</a></td><td class='tblprice'>"+ commaSeparateNumber(QUEEN)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
-              table.append("<tr><td>Waves 1-9 HM/King unlock/wave 6 unlock</th><td class='tblprice'>"+ commaSeparateNumber(FULLHM)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-9 HM (if already unlocked)</th><td class='tblprice'>"+ commaSeparateNumber(FULL_HM_ALREADY_UNLOCK)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-9 HM (as an ironman)</th><td class='tblprice'>"+ commaSeparateNumber(IRON_POINTS)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
-              table.append("<tr><td><a onclick='showtab(2)'>Wave 10 HM/King kill/Trim requirement</a></th><td class='tblprice'>"+ commaSeparateNumber(KING)+"</td><td class='tblprice'>"+KING_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 6-9 HM for BXP</td><td class='tblprice'>"+ commaSeparateNumber(PARTHM)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
+              table.append("<tr><td><a onclick='showtab(2)'>Wave 10 HM/King kill/Trim requirement</a></th><td class='tblprice'>"+ commaSeparateNumber(KING)+"</td><td class='tblprice'>"+KING_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 6-9 HM for Points</td><td class='tblprice'>"+ commaSeparateNumber(POINTS_PART)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-10 NM - solo leech</td><td class='tblprice'>"+ commaSeparateNumber(QUEEN*2)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
               forminfo.append(table);
