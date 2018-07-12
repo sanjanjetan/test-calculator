@@ -226,7 +226,7 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
 			  //credits
 			  var formcredits = $(document.createElement('form'));
 			  formcredits.attr({id: "Credits",class:"tabcontent"});
-			  formcredits.append("<strong>Credits</strong></br>Application creator: Jia </br> Points research/information gatherer: Shadowstream </br> BXP/level accuracy: Purewct (huge credit, spent over 2 months gathering)</br></br><strong>Additional credits</strong></br>CSS: Sanjan</br>Sledgehammer (testers): Shadowstream, RexT, Mahtiukko</br>Research round helpers: Many</br></br></br><span id='version'><strong>Last updated:</strong> 13/12/2017 &emsp; <strong>Version:</strong> 3.7.0</span></br></br>");
+			  formcredits.append("<strong>Credits</strong></br>Application creator: Jia </br> Points research/information gatherer: Shadowstream </br> BXP/level accuracy: Purewct (huge credit, spent over 2 months gathering)</br></br><strong>Additional credits</strong></br>CSS: Sanjan</br>Sledgehammer (testers): Shadowstream, RexT, Mahtiukko</br>Research round helpers: Many</br></br></br><span id='version'><strong>Last updated:</strong> 11/7/2018 &emsp; <strong>Version:</strong> 3.8.0</span></br></br>");
 
               //xp
               var formxp = $(document.createElement('form'));
