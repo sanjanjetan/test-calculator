@@ -704,12 +704,12 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
               var table = $(document.createElement('table')).attr({id:"infotbl"});
               table.append("<tr><th>Round</th><th>Price</th><th>Time</th></tr>");
               table.append("<tr><td><a onclick='showtab(1)'>Waves 1-10 NM/Queen kill/Completionist requirement</a></td><td class='tblprice'>"+ commaSeparateNumber(QUEEN)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
+              table.append("<tr><td>Waves 1-10 NM - solo leech</td><td class='tblprice'>"+ commaSeparateNumber(QUEEN*2)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-9 HM (if already unlocked)</th><td class='tblprice'>"+ commaSeparateNumber(FULL_HM_ALREADY_UNLOCK)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-9 HM (as an ironman)</th><td class='tblprice'>"+ commaSeparateNumber(IRON_POINTS)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 6-9 HM for BXP</td><td class='tblprice'>"+ commaSeparateNumber(PARTHM)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
-              table.append("<tr><td><a onclick='showtab(2)'>Wave 10 HM/King kill/Trim requirement</a></th><td class='tblprice'>"+ commaSeparateNumber(KING)+"</td><td class='tblprice'>"+KING_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 6-9 HM for Points</td><td class='tblprice'>"+ commaSeparateNumber(POINTS_PART)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
-              table.append("<tr><td>Waves 1-10 NM - solo leech</td><td class='tblprice'>"+ commaSeparateNumber(QUEEN*2)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
+              table.append("<tr><td><a onclick='showtab(2)'>Wave 10 HM/King kill/Trim requirement</a></th><td class='tblprice'>"+ commaSeparateNumber(KING)+"</td><td class='tblprice'>"+KING_T+" minutes</td></tr>");
               forminfo.append(table);
               forminfo.append($(document.createElement('br')));
               forminfo.append("Listed prices are rounds done with 2 leeches at once (unless explicitly stated otherwise). You may pay double listed price for an increased chance of leeching faster, to leech alone (please mention when asking). <br><br>For specifics please see the calculators provided (clicking the round in the table above opens the relevant tab). Prices may slightly vary based on if another leech requires 1-9 hard mode to be unlocked.  The points/xp obtained from HM 1-5 offsets the extra cost.  <br><br>Calculators will give an estimate of cost and the amount of rounds required. You may also request the specific leech via the calculator.");
