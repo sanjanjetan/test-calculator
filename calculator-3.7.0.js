@@ -109,7 +109,7 @@ jQuery.ajax = (function(_ajax){
 
 const LINK = "http://leechba.tk/queue.php";
 
-var QUEEN = 10000000;//1-10 2L
+var QUEEN = 12000000;//1-10 2L
 var PARTHM = 5000000;//6-9 2L
 var FULLHM = 9000000;//1-9 2L (assuming other guy already has)
 var KING = 12000000;
@@ -705,12 +705,18 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
               table.append("<tr><th>Round</th><th>Price</th><th>Time</th></tr>");
               table.append("<tr><td><a onclick='showtab(1)'>Waves 1-10 NM/Queen kill/Completionist requirement</a></td><td class='tblprice'>"+ commaSeparateNumber(QUEEN)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-9 HM/King unlock/wave 6 unlock</th><td class='tblprice'>"+ commaSeparateNumber(FULLHM)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
+              table.append("<tr><td>Waves 1-9 HM (if already unlocked)</th><td class='tblprice'>"+ commaSeparateNumber(FULL_HM_ALREADY_UNLOCK)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
+              table.append("<tr><td>Waves 1-9 HM (as an ironman)</th><td class='tblprice'>"+ commaSeparateNumber(IRON_POINTS)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
               table.append("<tr><td><a onclick='showtab(2)'>Wave 10 HM/King kill/Trim requirement</a></th><td class='tblprice'>"+ commaSeparateNumber(KING)+"</td><td class='tblprice'>"+KING_T+" minutes</td></tr>");
-              table.append("<tr><td>Waves 6-9 HM/Points/BXP</td><td class='tblprice'>"+ commaSeparateNumber(PARTHM)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
-			  table.append("<tr><td>Waves 1-10 NM - solo leech</td><td class='tblprice'>"+ commaSeparateNumber(QUEEN*2)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
+              table.append("<tr><td>Waves 6-9 HM for BXP</td><td class='tblprice'>"+ commaSeparateNumber(PARTHM)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
+              table.append("<tr><td>Waves 6-9 HM for Points</td><td class='tblprice'>"+ commaSeparateNumber(POINTS_PART)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
+              table.append("<tr><td>Waves 1-10 NM - solo leech</td><td class='tblprice'>"+ commaSeparateNumber(QUEEN*2)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
               forminfo.append(table);
               forminfo.append($(document.createElement('br')));
               forminfo.append("Listed prices are rounds done with 2 leeches at once (unless explicitly stated otherwise). You may pay double listed price for an increased chance of leeching faster, to leech alone (please mention when asking). <br><br>For specifics please see the calculators provided (clicking the round in the table above opens the relevant tab). <br><br>Calculators will give an estimate of cost and the amount of rounds required. You may also request the specific leech via the calculator.");
+              forminfo.append($(document.createElement('br')));
+              forminfo.append($(document.createElement('br')));
+              forminfo.append("Prices may slightly vary based on if another leech requires 1-9 hard mode to be unlocked.  The points/xp obtained from HM 1-5 offsets the cost.  Ironmen have increased cost due to being unable to be traded tickets.");
               forminfo.append($(document.createElement('br')));
               forminfo.attr({id:"Information",class:"tabcontent"});
               main.append(formxp);
@@ -1512,11 +1518,20 @@ function calculateP(points,role,unlock,ironman){
     if(unlock==1||ironman){
         var rounds = calculateFullRounds(points,FHM,ironman);
         var temp = points-rounds*FHM;
-        $("#breakdown").append(rounds+"x&nbsp; 1-9HM &nbsp;" + commaSeparateNumber(rounds*FULLHM));
+        $("#breakdown").append(rounds+"x&nbsp; 1-9HM &nbsp;" + commaSeparateNumber(rounds*FULL_HM_UNLOCK));
         $("#breakdown").append($(document.createElement('br')));
         $("#unlockstatus").val(2);
         $("#actual").val(parseInt($("#actual").val())+rounds*FHM);
         return rounds*FULLHM+calculateP(temp,role,2,ironman);
+    }
+    if(ironman) {
+        var rounds = calculateFullRounds(points,FHM,ironman);
+        var temp = points-rounds*FHM;
+        $("#breakdown").append(rounds+"x&nbsp; 1-9HM &nbsp;" + commaSeparateNumber(rounds*IRON_POINTS));
+        $("#breakdown").append($(document.createElement('br')));
+        $("#unlockstatus").val(2);
+        $("#actual").val(parseInt($("#actual").val())+rounds*FHM);
+        return rounds*FULLHM+calculateP(temp,role,2,ironman);        
     }
     if(unlock>=2){
         //everything is unlocked
@@ -1526,7 +1541,7 @@ function calculateP(points,role,unlock,ironman){
 			$("#breakdown").append($(document.createElement('br')));
 		}
 		var rounds=calculateRounds(points,PHM);
-        $("#breakdown").append(rounds +"x&nbsp; 6-9HM &nbsp;" + commaSeparateNumber(rounds*PARTHM));
+        $("#breakdown").append(rounds +"x&nbsp; 6-9HM &nbsp;" + commaSeparateNumber(rounds*POINTS_PART));
         return PARTHM*rounds;
     }
 }
