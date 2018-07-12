@@ -705,7 +705,8 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
               table.append("<tr><th>Round</th><th>Price</th><th>Time</th></tr>");
               table.append("<tr><td><a onclick='showtab(1)'>Waves 1-10 NM/Queen kill/Completionist requirement</a></td><td class='tblprice'>"+ commaSeparateNumber(QUEEN)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-10 NM - solo leech</td><td class='tblprice'>"+ commaSeparateNumber(QUEEN*2)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
-              table.append("<tr><td>Waves 1-9 HM (if already unlocked)</th><td class='tblprice'>"+ commaSeparateNumber(FULL_HM_ALREADY_UNLOCK)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
+              table.append("<tr><td>Waves 1-9 HM unlock</th><td class='tblprice'>"+ commaSeparateNumber(FULL_HM_UNLOCK)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
+              table.append("<tr><td>Waves 1-9 HM (if already unlocked) ***</th><td class='tblprice'>"+ commaSeparateNumber(FULL_HM_ALREADY_UNLOCK)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-9 HM (as an ironman)</th><td class='tblprice'>"+ commaSeparateNumber(IRON_POINTS)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 6-9 HM for BXP</td><td class='tblprice'>"+ commaSeparateNumber(PARTHM)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 6-9 HM for Points</td><td class='tblprice'>"+ commaSeparateNumber(POINTS_PART)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
@@ -1521,7 +1522,7 @@ function calculateP(points,role,unlock,ironman){
         $("#breakdown").append($(document.createElement('br')));
         $("#unlockstatus").val(2);
         $("#actual").val(parseInt($("#actual").val())+rounds*FHM);
-        return rounds*FULLHM+calculateP(temp,role,2,ironman);
+        return rounds*FULL_HM_UNLOCK+calculateP(temp,role,2,ironman);
     }
     if(ironman) {
         var rounds = calculateFullRounds(points,FHM,ironman);
@@ -1530,7 +1531,7 @@ function calculateP(points,role,unlock,ironman){
         $("#breakdown").append($(document.createElement('br')));
         $("#unlockstatus").val(2);
         $("#actual").val(parseInt($("#actual").val())+rounds*FHM);
-        return rounds*FULLHM+calculateP(temp,role,2,ironman);        
+        return rounds*IRON_POINTS+calculateP(temp,role,2,ironman);        
     }
     if(unlock>=2){
         //everything is unlocked
@@ -1541,7 +1542,7 @@ function calculateP(points,role,unlock,ironman){
 		}
 		var rounds=calculateRounds(points,PHM);
         $("#breakdown").append(rounds +"x&nbsp; 6-9HM &nbsp;" + commaSeparateNumber(rounds*POINTS_PART));
-        return POINTS_PART*rounds;
+        return POINTS_PART * rounds;
     }
 }
 function calculateFullRounds(points,FHM,ironman){
