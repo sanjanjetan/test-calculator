@@ -1514,7 +1514,7 @@ function calculateP(points,role,unlock,ironman){
         $("#actual").val(parseInt($("#actual").val())+NM);
         return QUEEN+calculateP(temp,role,1,ironman); //rerun but now hm is unlocked
     }
-    if(unlock==1||ironman){
+    if(unlock==1){
         var rounds = calculateFullRounds(points,FHM,ironman);
         var temp = points-rounds*FHM;
         $("#breakdown").append(rounds+"x&nbsp; 1-9HM &nbsp;" + commaSeparateNumber(rounds*FULL_HM_UNLOCK));
@@ -1541,7 +1541,7 @@ function calculateP(points,role,unlock,ironman){
 		}
 		var rounds=calculateRounds(points,PHM);
         $("#breakdown").append(rounds +"x&nbsp; 6-9HM &nbsp;" + commaSeparateNumber(rounds*POINTS_PART));
-        return PARTHM*rounds;
+        return POINTS_PART*rounds;
     }
 }
 function calculateFullRounds(points,FHM,ironman){
