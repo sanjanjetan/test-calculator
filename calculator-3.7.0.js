@@ -713,10 +713,10 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
               table.append("<tr><td>Waves 1-10 NM - solo leech</td><td class='tblprice'>"+ commaSeparateNumber(QUEEN*2)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
               forminfo.append(table);
               forminfo.append($(document.createElement('br')));
-              forminfo.append("Listed prices are rounds done with 2 leeches at once (unless explicitly stated otherwise). You may pay double listed price for an increased chance of leeching faster, to leech alone (please mention when asking). <br><br>For specifics please see the calculators provided (clicking the round in the table above opens the relevant tab). <br><br>Calculators will give an estimate of cost and the amount of rounds required. You may also request the specific leech via the calculator.");
+              forminfo.append("Listed prices are rounds done with 2 leeches at once (unless explicitly stated otherwise). You may pay double listed price for an increased chance of leeching faster, to leech alone (please mention when asking). <br><br>For specifics please see the calculators provided (clicking the round in the table above opens the relevant tab). Prices may slightly vary based on if another leech requires 1-9 hard mode to be unlocked.  The points/xp obtained from HM 1-5 offsets the extra cost.  <br><br>Calculators will give an estimate of cost and the amount of rounds required. You may also request the specific leech via the calculator.");
               forminfo.append($(document.createElement('br')));
               forminfo.append($(document.createElement('br')));
-              forminfo.append("Prices may slightly vary based on if another leech requires 1-9 hard mode to be unlocked.  The points/xp obtained from HM 1-5 offsets the cost.  Ironmen have increased cost due to being unable to be traded tickets.");
+              forminfo.append("Ironmen have increased cost due to being unable to be traded tickets.");
               forminfo.append($(document.createElement('br')));
               forminfo.attr({id:"Information",class:"tabcontent"});
               main.append(formxp);
@@ -1042,7 +1042,7 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
 		if(unlock==2){
 			//everything is unlocked
 			var rounds=calculateRoundsXP(level,bxp,PHM);
-			$("#breakdownxp").append(rounds +"x&nbsp; 6-9HM &nbsp;" + commaSeparateNumber(rounds*POINTS_PART));
+			$("#breakdownxp").append(rounds +"x&nbsp; 6-9HM &nbsp;" + commaSeparateNumber(rounds*PARTHM));
 			$("#breakdownxp").append($(document.createElement('br')));
 			$("#counter").val(parseInt($("#counter").val())+parseInt(rounds*PHM));
 			return PARTHM*rounds;
