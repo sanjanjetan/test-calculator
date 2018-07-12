@@ -291,7 +291,7 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
               var queen = $(document.createElement('option')).attr({value:"queen"});
               queen.append("Killed queen");
               var hardmode = $(document.createElement('option')).attr({value:"hardmode"});
-              hardmode.append("Completed Wave 6 or up to Wave 9");
+              hardmode.append("Completed up to Wave 6 or up to Wave 9");
               var king = $(document.createElement('option')).attr({value:"king"});
               king.append("Unlocked king (Unlocked up to wave 10)");
               ba.attr({id:"baxp",name:"xp_ba"});
@@ -568,9 +568,9 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
               var queen = $(document.createElement('option')).attr({value:"queen"});
               queen.append("Killed queen");
               var hardmode = $(document.createElement('option')).attr({id:"hardmode",value:"hardmode"});
-              hardmode.append("Completed Wave 6 or higher Hardmode");
+              hardmode.append("Completed up to Wave 6 or up to Wave 9 (King NOT unlocked)");
               var king = $(document.createElement('option')).attr({value:"king"});
-              king.append("Killed king");
+              king.append("Unlocked or killed king (Unlocked wave 10)");
               ba.attr({id:"ba"});
               ba.append(none);
               ba.append(queen);
