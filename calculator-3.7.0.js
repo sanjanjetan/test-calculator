@@ -706,7 +706,7 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
               table.append("<tr><td><a onclick='showtab(1)'>Waves 1-10 NM/Queen kill/Completionist requirement</a></td><td class='tblprice'>"+ commaSeparateNumber(QUEEN)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-10 NM - solo leech</td><td class='tblprice'>"+ commaSeparateNumber(QUEEN*2)+"</td><td class='tblprice'>"+QUEEN_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-9 HM unlock</th><td class='tblprice'>"+ commaSeparateNumber(FULL_HM_UNLOCK)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
-              table.append("<tr><td>Waves 1-9 HM (if already unlocked) ***</th><td class='tblprice'>"+ commaSeparateNumber(FULL_HM_ALREADY_UNLOCK)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
+              table.append("<tr><td>Waves 1-9 HM (if already unlocked, please read information below) ***</th><td class='tblprice'>"+ commaSeparateNumber(FULL_HM_ALREADY_UNLOCK)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 1-9 HM (as an ironman)</th><td class='tblprice'>"+ commaSeparateNumber(IRON_POINTS)+"</td><td class='tblprice'>"+FULLHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 6-9 HM for BXP</td><td class='tblprice'>"+ commaSeparateNumber(PARTHM)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
               table.append("<tr><td>Waves 6-9 HM for Points</td><td class='tblprice'>"+ commaSeparateNumber(POINTS_PART)+"</td><td class='tblprice'>"+PARTHM_T+" minutes</td></tr>");
@@ -877,10 +877,14 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
 				  if($("#ironmany").is(":checked")) ironman=true;
 
 				  if($("#presets").val()!="nm" && $("#presets").val()!="king"){
+
 					  $("#breakdown").append("!!DO NOT QUOTE INDIVIDUAL ROLES IF NEEDS MULTIPLE ROLES!!");
 					  $("#breakdown").append($(document.createElement('br')));
 					  $("#breakdown").append("Breakdown (points from changing during mid round are taken into account): ");
-					  $("#breakdown").append($(document.createElement('br')));
+                      $("#breakdown").append($(document.createElement('br')));
+                      if(ironman) {
+                        $("#breakdown").append("Please note cost will likely be lower than stated, since you will be using tickets for the last half of leeching.");
+                      }
 					  updateunlock();
 
 					  //calculate how many points needed
