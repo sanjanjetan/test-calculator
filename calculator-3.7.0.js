@@ -884,6 +884,7 @@ const leveldifference = [0,200,300,400,500,0]; //0,1,2,3,4,5. if level 1, needs 
                       $("#breakdown").append($(document.createElement('br')));
                       if(ironman) {
                         $("#breakdown").append("Please note cost will likely be lower than stated, since you will be using tickets for the last half of leeching.");
+						$("#breakdown").append($(document.createElement('br')));
                       }
 					  updateunlock();
 
@@ -1372,20 +1373,27 @@ function calculatepoints(needApoints,needDpoints,needCpoints,needHpoints,ironman
     $("#breakdown").append($(document.createElement('br')));
     cost = cost+calculateP(needApoints,'a',$("#unlockstatus").val(),ironman);
     $("#excess").val(parseInt($("#excess").val())+parseInt($("#actual").val())-needApoints); //works out how much excess points there are
-    $("#actual").val(0); //looks at spare points from attack and see if it can cover a collector round
-    while(parseInt($("#excess").val())>180&&!ironman){
-        $("#excess").val(parseInt($("#excess").val())-180);
-        needCpoints-=180;
-    }
-    while(parseInt($("#excess").val())>HMCOL&&ironman){
-        $("#excess").val(parseInt($("#excess").val())-HMCOL);
-        needCpoints-=HMCOL;
-    }
     $("#breakdown").append($(document.createElement('br')));
     $("#breakdown").append($(document.createElement('br')));
     $("#breakdown").append("Collector role");
     $("#breakdown").append($(document.createElement('br')));
     $("#actual").val(0);
+	if(parseInt($("#excess").val())>180&&!ironman){
+		$("#breakdown").append("Using points from spare waves from other roles");
+		$("#breakdown").append($(document.createElement('br')));
+	}
+	while(parseInt($("#excess").val())>180&&!ironman){
+		$("#excess").val(parseInt($("#excess").val())-180);
+		needCpoints-=180;
+	}
+	if(parseInt($("#excess").val())>HMCOL&&ironman){
+		$("#breakdown").append("Using points from spare waves from other roles");
+		$("#breakdown").append($(document.createElement('br')));
+	}
+	while(parseInt($("#excess").val())>HMCOL&&ironman){
+		$("#excess").val(parseInt($("#excess").val())-HMCOL);
+		needCpoints-=HMCOL;
+	}
     cost = cost+calculateP(needCpoints,'c',$("#unlockstatus").val(),ironman);
     $("#excess").val(parseInt($("#excess").val())+parseInt($("#actual").val())-needCpoints); //works out how much excess points there are
     $("#breakdown").append($(document.createElement('br')));
@@ -1393,10 +1401,18 @@ function calculatepoints(needApoints,needDpoints,needCpoints,needHpoints,ironman
     $("#breakdown").append("Defender role");
     $("#breakdown").append($(document.createElement('br')));
     $("#actual").val(0);
+	if(parseInt($("#excess").val())>250&&!ironman){
+		$("#breakdown").append("Using points from spare waves from other roles");
+		$("#breakdown").append($(document.createElement('br')));
+	}
     while(parseInt($("#excess").val())>250&&!ironman){
         $("#excess").val(parseInt($("#excess").val())-250);
         needDpoints-=250;
     }
+	if(parseInt($("#excess").val())>HMDEF&&ironman){
+		$("#breakdown").append("Using points from spare waves from other roles");
+		$("#breakdown").append($(document.createElement('br')));
+	}
     while(parseInt($("#excess").val())>HMDEF&&ironman){
         $("#excess").val(parseInt($("#excess").val())-HMDEF);
         needDpoints-=HMDEF;
@@ -1408,10 +1424,18 @@ function calculatepoints(needApoints,needDpoints,needCpoints,needHpoints,ironman
     $("#breakdown").append("Healer role");
     $("#breakdown").append($(document.createElement('br')));
     $("#actual").val(0);
+	if(parseInt($("#excess").val())>230&&!ironman){
+		$("#breakdown").append("Using points from spare waves from other roles");
+		$("#breakdown").append($(document.createElement('br')));
+	}
     while(parseInt($("#excess").val())>230&&!ironman){
         $("#excess").val(parseInt($("#excess").val())-230);
         needHpoints-=230;
     }
+	if(parseInt($("#excess").val())>HMHEAL&&ironman){
+		$("#breakdown").append("Using points from spare waves from other roles");
+		$("#breakdown").append($(document.createElement('br')));
+	}
     while(parseInt($("#excess").val())>HMHEAL&&ironman){
         $("#excess").val(parseInt($("#excess").val())-HMHEAL);
         needHpoints-=HMHEAL;
@@ -1519,23 +1543,20 @@ function calculateP(points,role,unlock,ironman){
         $("#actual").val(parseInt($("#actual").val())+NM);
         return QUEEN+calculateP(temp,role,1,ironman); //rerun but now hm is unlocked
     }
+	if(ironman) {
+		var rounds = calculateFullRounds(points,FHM,ironman);
+		$("#breakdown").append(rounds+"x&nbsp; 1-9HM &nbsp;" + commaSeparateNumber(rounds*IRON_POINTS));
+		$("#breakdown").append($(document.createElement('br')));
+		$("#unlockstatus").val(2);
+		return rounds*IRON_POINTS;
+	}
     if(unlock==1){
         var rounds = calculateFullRounds(points,FHM,ironman);
         var temp = points-rounds*FHM;
         $("#breakdown").append(rounds+"x&nbsp; 1-9HM &nbsp;" + commaSeparateNumber(rounds*FULL_HM_UNLOCK));
         $("#breakdown").append($(document.createElement('br')));
         $("#unlockstatus").val(2);
-        $("#actual").val(parseInt($("#actual").val())+rounds*FHM);
         return rounds*FULL_HM_UNLOCK+calculateP(temp,role,2,ironman);
-    }
-    if(ironman) {
-        var rounds = calculateFullRounds(points,FHM,ironman);
-        var temp = points-rounds*FHM;
-        $("#breakdown").append(rounds+"x&nbsp; 1-9HM &nbsp;" + commaSeparateNumber(rounds*IRON_POINTS));
-        $("#breakdown").append($(document.createElement('br')));
-        $("#unlockstatus").val(2);
-        $("#actual").val(parseInt($("#actual").val())+rounds*FHM);
-        return rounds*IRON_POINTS+calculateP(temp,role,2,ironman);        
     }
     if(unlock>=2){
         //everything is unlocked
@@ -1564,7 +1585,7 @@ function calculateFullRounds(points,FHM,ironman){
 	}
 	//add to
     $("#actual").val(parseInt($("#actual").val())+(roundpoints));
-    
+
     if(points-roundpoints<=0){
         return rounds;
     }
