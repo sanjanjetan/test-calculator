@@ -1553,10 +1553,22 @@ function calculateFullRounds(points,FHM,ironman){
     //the amount of rounds of 1-9s needed (if ironman)
     if(!ironman) return 1;
     var rounds=1;
-    if(points-FHM<=0){
+    var roundpoints = FHM;
+    if($("#enhancer_h").val()>0){
+		//only consume 4 charges
+		roundpoints=parseInt((roundpoints)+(roundpoints*Math.min($("#enhancer_h").val(),9))/9);
+		$("#enhancer_h").val(Math.max($("#enhancer_h").val()-9,0));
+    }
+    if($("#excess").val()>points){
+		return 0;
+	}
+	//add to
+    $("#actual").val(parseInt($("#actual").val())+(roundpoints));
+    
+    if(points-roundpoints<=0){
         return rounds;
     }
-    return rounds+calculateFullRounds(points-FHM,FHM,ironman);
+    return rounds+calculateFullRounds(points-roundpoints,FHM,ironman);
 }
 function calculateRounds(points,PHM){
     //the amount of rounds of 6-9s needed
